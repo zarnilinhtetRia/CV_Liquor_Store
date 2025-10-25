@@ -52,7 +52,9 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
+    Route::get('/api-docs', function () {
+        return view('api_docs');
+    });
     // Route::post('/reset-deleted-at', function () {
     //     DB::table('items')->update(['deleted_at' => null]);
     //     DB::table('item_variations')->update(['deleted_at' => null]);

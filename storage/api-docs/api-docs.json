@@ -1,0 +1,160 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My API",
+        "description": "This is the API documentation for my Laravel application.",
+        "contact": {
+            "email": "support@example.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Retrieve a list of all users",
+                "operationId": "853bdb5dc461c9c8ce252dc64e54df25",
+                "responses": {
+                    "200": {
+                        "description": "User list retrieved successfully"
+                    },
+                    "404": {
+                        "description": "User list not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/user_register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Store a new user",
+                "operationId": "487e0253034a05dbd58106279c9deac3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "account_id",
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "type",
+                                    "confirm_password",
+                                    "father_name",
+                                    "phone",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "account_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "email": {
+                                        "type": "email",
+                                        "example": "example@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "password",
+                                        "example": ""
+                                    },
+                                    "confirm_password": {
+                                        "type": "password",
+                                        "example": ""
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "Staff"
+                                    },
+                                    "father_name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "social_media": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/api/v1/user_login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "User",
+                "operationId": "088ddcd01429292c2536fa771f65fc44",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email",
+                                        "example": "example@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "password",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Login successfully"
+                    },
+                    "401": {
+                        "description": "Login Failed"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "User",
+            "description": "User"
+        }
+    ]
+}
