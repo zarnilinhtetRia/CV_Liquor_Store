@@ -9,6 +9,178 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/v1/location": {
+            "get": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Retrieve a list of all locations",
+                "operationId": "779a41c3b7bb0377e94b79a2a74aa408",
+                "responses": {
+                    "200": {
+                        "description": "Location list retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Location list not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/location_register": {
+            "post": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Store a new location",
+                "operationId": "7855b7307ed44a5e61d37d50830b71b6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Location created successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/api/v1/location_update/{id}": {
+            "put": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Update a location",
+                "operationId": "962259642b96e992182647925b2258fb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the location to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Location updated successfully"
+                    },
+                    "404": {
+                        "description": "Location not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/location_destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Delete a location",
+                "operationId": "70917ac4de6c32d82c1cb1bba78817c1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the location to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Location deleted successfully"
+                    },
+                    "404": {
+                        "description": "Location not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/location_show/{id}": {
+            "get": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Retrieve a specific location",
+                "operationId": "551c1e347b136d96d2a4400da49fbd13",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the location to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Location retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Location not found"
+                    }
+                }
+            }
+        },
         "/api/v1/users": {
             "get": {
                 "tags": [
@@ -66,7 +238,7 @@
                                         "type": "password",
                                         "example": ""
                                     },
-                                    "confirm_password": {
+                                    "password_confirmation": {
                                         "type": "password",
                                         "example": ""
                                     },
@@ -78,7 +250,7 @@
                                         "type": "string",
                                         "example": ""
                                     },
-                                    "phone": {
+                                    "phno": {
                                         "type": "string",
                                         "example": ""
                                     },
@@ -89,6 +261,10 @@
                                     "social_media": {
                                         "type": "string",
                                         "example": ""
+                                    },
+                                    "location": {
+                                        "type": "integer",
+                                        "example": "1"
                                     }
                                 },
                                 "type": "object"
@@ -102,6 +278,129 @@
                     },
                     "400": {
                         "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/api/v1/user_update/{id}": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update a user",
+                "operationId": "9bc1a77cfed1d791a5d3a296f6de6cf0",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the user to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "account_id",
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "type",
+                                    "confirm_password",
+                                    "father_name",
+                                    "phone",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "account_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "email": {
+                                        "type": "email",
+                                        "example": "example@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "password",
+                                        "example": ""
+                                    },
+                                    "password_confirmation": {
+                                        "type": "password",
+                                        "example": ""
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "Staff"
+                                    },
+                                    "father_name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "phno": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "social_media": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "location": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/user_destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete a user",
+                "operationId": "7c381631ac3a38b56425557994ce7681",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the user to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully"
+                    },
+                    "404": {
+                        "description": "User not found"
                     }
                 }
             }
@@ -149,9 +448,41 @@
                     }
                 }
             }
+        },
+        "/api/v1/user_show/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Retrieve a specific user",
+                "operationId": "332ea3da0d37e7fd06d7ad9bfe76a108",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the user to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User retrieved successfully"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
         }
     },
     "tags": [
+        {
+            "name": "Location",
+            "description": "Location"
+        },
         {
             "name": "User",
             "description": "User"

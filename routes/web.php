@@ -62,10 +62,10 @@ Route::middleware('auth')->group(function () {
 
     //     return back()->with('success', 'Deleted records restored!');
     // });
-    // Route::get('/migrate', function () {
-    //     Artisan::call('migrate');
-    //     return 'Migrations have been run successfully.';
-    // });
+    Route::get('/migrate', function () {
+        Artisan::call('migrate');
+        return 'Migrations have been run successfully.';
+    });
 
     //dashboard
     Route::get('home', [DashboardController::class, 'home'])->name('home');
