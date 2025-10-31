@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\Version1\LoginAPIController;
 use App\Http\Controllers\API\Version1\LocationAPIController;
+use App\Http\Controllers\API\Version1\SenderCustomerAPIController;
+use App\Http\Controllers\API\Version1\ReceiverCustomerAPIController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,3 +38,17 @@ Route::post('/location_register', [LocationAPIController::class, 'store']);
 Route::put('/location_update/{id}', [LocationAPIController::class, 'update']);
 Route::delete('/location_destroy/{id}', [LocationAPIController::class, 'destroy']);
 Route::get('/location_show/{id}', [LocationAPIController::class, 'show']);
+
+//sender_customer_management
+Route::get('/sender_customers', [SenderCustomerAPIController::class, 'index']);
+Route::post('/sender_customer_register', [SenderCustomerAPIController::class, 'store']);
+Route::put('/sender_customer_update/{id}', [SenderCustomerAPIController::class, 'update']);
+Route::delete('/sender_customer_destroy/{id}', [SenderCustomerAPIController::class, 'destroy']);
+Route::get('/sender_customer_show/{id}', [SenderCustomerAPIController::class, 'show']);
+
+//receiver_customer_management
+Route::get('/receiver_customers', [ReceiverCustomerAPIController::class, 'index']);
+Route::post('/receiver_customer_register', [ReceiverCustomerAPIController::class, 'store']);
+Route::put('/receiver_customer_update/{id}', [ReceiverCustomerAPIController::class, 'update']);
+Route::delete('/receiver_customer_destroy/{id}', [ReceiverCustomerAPIController::class, 'destroy']);
+Route::get('/receiver_customer_show/{id}', [ReceiverCustomerAPIController::class, 'show']);

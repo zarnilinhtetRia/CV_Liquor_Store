@@ -624,6 +624,249 @@
         </div>
 
 
+           <div class="api-section">
+            <div class="section-header">
+                <i class="fas fa-user-circle"></i>
+                <h2>Sender Customer Management APIs</h2>
+            </div>
+            <div class="endpoint-list">
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/v1/sender_customers</span>
+                            <span class="endpoint-description">Retrieve a list of all sender customers</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-post">POST</span>
+                            <span class="endpoint-path">/api/v1/sender_customer_register</span>
+                            <span class="endpoint-description">Register a new sender customer</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                    <div class="endpoint-details">
+                        <div class="request-sample">
+                            <h4><i class="fas fa-code"></i> Request Sample</h4>
+                              <div class="code-container">
+                                <button class="copy-button" onclick="copyToClipboard(this, 'sender_customer_register')">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                                <div class="code-block" id="sender_customer_register">
+{</br />
+    <span class="json-key">"name"</span>: <span class="json-string">"Mg Mg"</span>,<br />
+    <span class="json-key">"phone"</span>: <span class="json-string">"+1234567890"</span>,<br />
+    <span class="json-key">"address"</span>: <span class="json-string">"123 Business St, City, State 12345"</span>,<br />
+    <span class="json-key">"location"</span>: <span class="json-string">1</span><br />
+}
+                            </div>
+                        </div>
+                        </div>
+                        <div class="request-sample">
+                            <h4><i class="fas fa-info-circle"></i> Field Requirements</h4>
+                            <div class="code-block">
+                                <span class="json-key">"name"</span> - Sender customer name (required)<br />
+                                <span class="json-key">"phone"</span> - Contact phone number (optional)<br />
+                                <span class="json-key">"address"</span> - Physical address (optional)<br />
+                                <span class="json-key">"location"</span> - Location ID (required)<br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-put">PUT</span>
+                            <span class="endpoint-path">/api/v1/sender_customer_update/{id}</span>
+                            <span class="endpoint-description">Update an existing sender customer by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                    <div class="endpoint-details">
+                        <div class="request-sample">
+                            <h4><i class="fas fa-code"></i> Request Sample</h4>
+                            <div class="code-container">
+                                <button class="copy-button" onclick="copyToClipboard(this, 'sender_customer_update')">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                                <div class="code-block" id="sender_customer_update">
+{<br />
+    <span class="json-key">"name"</span>: <span class="json-string">"Updated Sender Customer Name"</span>,<br />
+    <span class="json-key">"address"</span>: <span class="json-string">"456 New Business St, City, Country"</span>,<br />
+    <span class="json-key">"phone"</span>: <span class="json-string">"+1987654321"</span>,<br />
+    <span class="json-key">"location"</span>: <span class="json-string">1</span><br />
+}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-sample">
+                            <h4><i class="fas fa-info-circle"></i> Field Requirements</h4>
+                            <div class="code-block">
+                                <span class="json-key">"name"</span> - Sender customer name (required)<br />
+                                <span class="json-key">"phone"</span> - Contact phone number (optional)<br />
+                                <span class="json-key">"address"</span> - Physical address (optional)<br />
+                                <span class="json-key">"location"</span> - Location ID (required)<br />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/v1/sender_customer_show/{id}</span>
+                            <span class="endpoint-description">Retrieve a specific sender customer by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/v1/sender_customer_destroy/{id}</span>
+                            <span class="endpoint-description">Delete a sender customer by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="api-section">
+            <div class="section-header">
+                <i class="fas fa-user"></i>
+                <h2>Receiver Customer Management APIs</h2>
+            </div>
+            <div class="endpoint-list">
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/v1/receiver_customers</span>
+                            <span class="endpoint-description">Retrieve a list of all receiver customers</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-post">POST</span>
+                            <span class="endpoint-path">/api/v1/receiver_customer_register</span>
+                            <span class="endpoint-description">Register a new receiver customer</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                    <div class="endpoint-details">
+                        <div class="request-sample">
+                            <h4><i class="fas fa-code"></i> Request Sample</h4>
+                              <div class="code-container">
+                                <button class="copy-button" onclick="copyToClipboard(this, 'receiver_customer_register')">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                                <div class="code-block" id="receiver_customer_register">
+{</br />
+    <span class="json-key">"name"</span>: <span class="json-string">"Aung Aung"</span>,<br />
+    <span class="json-key">"phone"</span>: <span class="json-string">"+7234567890"</span>,<br />
+    <span class="json-key">"address"</span>: <span class="json-string">"542 Business St, City, State 12345"</span>,<br />
+    <span class="json-key">"location"</span>: <span class="json-string">1</span><br />
+}
+                            </div>
+                        </div>
+                        </div>
+                        <div class="request-sample">
+                            <h4><i class="fas fa-info-circle"></i> Field Requirements</h4>
+                            <div class="code-block">
+                                <span class="json-key">"name"</span> - Receiver customer name (required)<br />
+                                <span class="json-key">"phone"</span> - Contact phone number (optional)<br />
+                                <span class="json-key">"address"</span> - Physical address (optional)<br />
+                                <span class="json-key">"location"</span> - Location ID (required)<br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-put">PUT</span>
+                            <span class="endpoint-path">/api/v1/receiver_customer_update/{id}</span>
+                            <span class="endpoint-description">Update an existing receiver customer by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                    <div class="endpoint-details">
+                        <div class="request-sample">
+                            <h4><i class="fas fa-code"></i> Request Sample</h4>
+                            <div class="code-container">
+                                <button class="copy-button" onclick="copyToClipboard(this, 'receiver_customer_update')">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                                <div class="code-block" id="receiver_customer_update">
+{<br />
+    <span class="json-key">"name"</span>: <span class="json-string">"Updated Receiver Customer Name"</span>,<br />
+    <span class="json-key">"address"</span>: <span class="json-string">"456 New Business St, City, Country"</span>,<br />
+    <span class="json-key">"phone"</span>: <span class="json-string">"+1987654321"</span>,<br />
+    <span class="json-key">"location"</span>: <span class="json-string">1</span><br />
+}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-sample">
+                            <h4><i class="fas fa-info-circle"></i> Field Requirements</h4>
+                            <div class="code-block">
+                                <span class="json-key">"name"</span> - Receiver customer name (required)<br />
+                                <span class="json-key">"phone"</span> - Contact phone number (optional)<br />
+                                <span class="json-key">"address"</span> - Physical address (optional)<br />
+                                <span class="json-key">"location"</span> - Location ID (required)<br />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/v1/receiver_customer_show/{id}</span>
+                            <span class="endpoint-description">Retrieve a specific receiver customer by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/v1/receiver_customer_destroy/{id}</span>
+                            <span class="endpoint-description">Delete a receiver customer by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
 
     </div>
