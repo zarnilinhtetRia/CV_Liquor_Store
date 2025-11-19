@@ -476,6 +476,857 @@
                     }
                 }
             }
+        },
+        "/api/v1/user_logout": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logout a user",
+                "operationId": "029e5aad9470021f8b6e3a7f793a6179",
+                "responses": {
+                    "200": {
+                        "description": "User logged out successfully"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/v1/orders": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Retrieve a list of all orders",
+                "operationId": "6d89b6991269761984f5ea4ad68d91ad",
+                "responses": {
+                    "200": {
+                        "description": "Order list retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Order list not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/order_register": {
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Store a new order",
+                "operationId": "4f459bcf6e3e53f600b648bdbe380da9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "shop_id",
+                                    "manager_id",
+                                    "order_id",
+                                    "order_status",
+                                    "order_date",
+                                    "sender_id",
+                                    "receiver_id",
+                                    "order_weight",
+                                    "sub_amount",
+                                    "parcel_price",
+                                    "code_price",
+                                    "total_amount",
+                                    "cash_status",
+                                    "note",
+                                    "order_type"
+                                ],
+                                "properties": {
+                                    "shop_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "manager_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "order_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "order_status": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "order_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-11-07"
+                                    },
+                                    "sender_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "receiver_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "order_weight": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "sub_amount": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "parcel_price": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "code_price": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "total_amount": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "cash_status": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "order_type": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Order created successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/api/v1/order_update/{id}": {
+            "put": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Update a order",
+                "operationId": "57c3930ab693f10fc4789641a5b41817",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the order to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "shop_id",
+                                    "manager_id",
+                                    "order_id",
+                                    "order_status",
+                                    "order_date",
+                                    "sender_id",
+                                    "receiver_id",
+                                    "order_weight",
+                                    "sub_amount",
+                                    "parcel_price",
+                                    "code_price",
+                                    "total_amount",
+                                    "cash_status",
+                                    "note",
+                                    "order_type"
+                                ],
+                                "properties": {
+                                    "shop_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "manager_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "order_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "order_status": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "order_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2025-11-07"
+                                    },
+                                    "sender_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "receiver_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "order_weight": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "sub_amount": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "parcel_price": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "code_price": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "total_amount": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "cash_status": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "order_type": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Order updated successfully"
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/order_destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Delete a order",
+                "operationId": "ac4377682782a517482941e6296c446f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the Order to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order deleted successfully"
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/order_show/{id}": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Retrieve a specific order",
+                "operationId": "7dccc25a639f3cf1dad4e84e84990ea4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the Order to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Order retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Order not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/receiver_customers": {
+            "get": {
+                "tags": [
+                    "Receiver Customer"
+                ],
+                "summary": "Retrieve a list of all receiver customers",
+                "operationId": "039ed3184b2199a8ff11b26caffba8c6",
+                "responses": {
+                    "200": {
+                        "description": "Receiver customer list retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Receiver customer list not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/receiver_customer_register": {
+            "post": {
+                "tags": [
+                    "Receiver Customer"
+                ],
+                "summary": "Store a new receiver customer",
+                "operationId": "b6c4d4bb44337b969099bb4744449adc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Receiver customer created successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/api/v1/receiver_customer_update/{id}": {
+            "put": {
+                "tags": [
+                    "Receiver Customer"
+                ],
+                "summary": "Update a receiver customer",
+                "operationId": "89eb801d3c0d07a2e379e040b0d93a64",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the receiver customer to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Receiver customer updated successfully"
+                    },
+                    "404": {
+                        "description": "Receiver customer not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/receiver_customer_destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Receiver Customer"
+                ],
+                "summary": "Delete a receiver customer",
+                "operationId": "50c5208c813026ca91c48ef5c26465e2",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the receiver customer to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Receiver customer deleted successfully"
+                    },
+                    "404": {
+                        "description": "Receiver customer not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/receiver_customer_show/{id}": {
+            "get": {
+                "tags": [
+                    "Receiver Customer"
+                ],
+                "summary": "Retrieve a specific receiver customer",
+                "operationId": "aecb0d34ca7705d7e9978a6703308263",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the receiver customer to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Receiver customer retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Receiver customer not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/sender_customers": {
+            "get": {
+                "tags": [
+                    "Sender Customer"
+                ],
+                "summary": "Retrieve a list of all sender customers",
+                "operationId": "a3187d98ac3c4211eb5930a8efaa1106",
+                "responses": {
+                    "200": {
+                        "description": "Sender customer list retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Sender customer list not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/sender_customer_register": {
+            "post": {
+                "tags": [
+                    "Sender Customer"
+                ],
+                "summary": "Store a new sender customer",
+                "operationId": "ba14955f35215a3ad65080757a9371fc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sender customer created successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/api/v1/sender_customer_update/{id}": {
+            "put": {
+                "tags": [
+                    "Sender Customer"
+                ],
+                "summary": "Update a sender customer",
+                "operationId": "0b7b43ca948f2fcd918c664fc6b67631",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the sender customer to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "location": {
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sender customer updated successfully"
+                    },
+                    "404": {
+                        "description": "Sender customer not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/sender_customer_destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Sender Customer"
+                ],
+                "summary": "Delete a sender customer",
+                "operationId": "3ef38e2c0fa4f9d96d5a4ebce9ab2ba6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the sender customer to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sender customer deleted successfully"
+                    },
+                    "404": {
+                        "description": "Sender customer not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/sender_customer_show/{id}": {
+            "get": {
+                "tags": [
+                    "Sender Customer"
+                ],
+                "summary": "Retrieve a specific sender customer",
+                "operationId": "cd465eb65d0f9c9672a7cb75a6810a03",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the sender customer to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sender customer retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Sender customer not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/track_histories": {
+            "get": {
+                "tags": [
+                    "Track History"
+                ],
+                "summary": "Get all Track Histories",
+                "operationId": "c3ae2c83d42a7534f53c13b6c2fa465c",
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        },
+        "/api/v1/track_history_register": {
+            "post": {
+                "tags": [
+                    "Track History"
+                ],
+                "summary": "Store a new Track History",
+                "operationId": "13fe5bcd05006709641ade451881f283",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "track_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "staff_name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "pending"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Track History created successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/api/v1/track_history_show/{id}": {
+            "get": {
+                "tags": [
+                    "Track History"
+                ],
+                "summary": "Retrieve a specific Track History by ID",
+                "operationId": "3ec4b4b236b50753070243474bec0b13",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Track History",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Track History retrieved successfully"
+                    }
+                }
+            }
+        },
+        "/api/v1/track_history_destroy/{id}": {
+            "delete": {
+                "tags": [
+                    "Track History"
+                ],
+                "summary": "Delete a Track History ",
+                "operationId": "961ac3e7912b185fdc1bd4745347452f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the Track History to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Track History deleted successfully"
+                    },
+                    "404": {
+                        "description": "Track History not found"
+                    }
+                }
+            }
+        },
+        "/api/v1/track_history_update/{id}": {
+            "put": {
+                "tags": [
+                    "Track History"
+                ],
+                "summary": "Update a Track History",
+                "operationId": "397cd0417bc93d973f8e7863d44c90eb",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the Track History to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "track_id": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "title": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "staff_name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "pending"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Track History updated successfully"
+                    },
+                    "404": {
+                        "description": "Track History not found"
+                    }
+                }
+            }
         }
     },
     "tags": [
@@ -486,6 +1337,22 @@
         {
             "name": "User",
             "description": "User"
+        },
+        {
+            "name": "Order",
+            "description": "Order"
+        },
+        {
+            "name": "Receiver Customer",
+            "description": "Receiver Customer"
+        },
+        {
+            "name": "Sender Customer",
+            "description": "Sender Customer"
+        },
+        {
+            "name": "Track History",
+            "description": "Track History"
         }
     ]
 }

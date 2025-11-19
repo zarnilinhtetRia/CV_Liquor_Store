@@ -71,7 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::get('home', [DashboardController::class, 'home'])->name('home');
     Route::get('dashboard/{branch?}', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('items', [ItemController::class, 'index']);
+
     Route::post('items_register', [ItemController::class, 'register']);
     //for item search to add
     Route::get('/item_search', [InvoiceController::class, 'item_search'])->name(

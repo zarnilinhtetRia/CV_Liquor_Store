@@ -5,9 +5,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\Version1\LoginAPIController;
+use App\Http\Controllers\API\Version1\OrderAPIController;
 use App\Http\Controllers\API\Version1\LocationAPIController;
 use App\Http\Controllers\API\Version1\SenderCustomerAPIController;
 use App\Http\Controllers\API\Version1\ReceiverCustomerAPIController;
+use App\Http\Controllers\API\Version1\TrackHistoryAPIController;
+use App\Models\TrackHistory;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,9 +32,13 @@ Route::get('/users', [LoginAPIController::class, 'index']);
 //user_login
 Route::post('/user_register', [LoginAPIController::class, 'user_register']);
 Route::post('/user_login', [LoginAPIController::class, 'user_login']);
+
 Route::put('/user_update/{id}', [LoginAPIController::class, 'update']);
 Route::delete('/user_destroy/{id}', [LoginAPIController::class, 'destroy']);
 Route::get('/user_show/{id}', [LoginAPIController::class, 'show']);
+Route::post('user_logout', [LoginAPIController::class, 'logout']);
+Route::post('change_password/{id}', [LoginAPIController::class, 'change_password']);
+
 
 //location_management
 Route::get('/location', [LocationAPIController::class, 'index']);
@@ -52,3 +60,19 @@ Route::post('/receiver_customer_register', [ReceiverCustomerAPIController::class
 Route::put('/receiver_customer_update/{id}', [ReceiverCustomerAPIController::class, 'update']);
 Route::delete('/receiver_customer_destroy/{id}', [ReceiverCustomerAPIController::class, 'destroy']);
 Route::get('/receiver_customer_show/{id}', [ReceiverCustomerAPIController::class, 'show']);
+
+
+//order_management
+Route::get('/orders', [OrderAPIController::class, 'index']);
+Route::post('/order_register', [OrderAPIController::class, 'store']);
+Route::put('/order_update/{id}', [OrderAPIController::class, 'update']);
+Route::delete('/order_destroy/{id}', [OrderAPIController::class, 'destroy']);
+Route::get('/order_show/{id}', [OrderAPIController::class, 'show']);
+Route::post('/change_order_status/{id}', [OrderAPIController::class, 'change_status']);
+
+//Track History
+Route::get('/track_histories', [TrackHistoryAPIController::class, 'index']);
+Route::post('/track_history_register', [TrackHistoryAPIController::class, 'store']);
+Route::put('/track_history_update/{id}', [TrackHistoryAPIController::class, 'update']);
+Route::delete('/track_history_destroy/{id}', [TrackHistoryAPIController::class, 'destroy']);
+Route::get('/track_history_show/{id}', [TrackHistoryAPIController::class, 'show']);

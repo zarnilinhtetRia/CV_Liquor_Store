@@ -64,7 +64,7 @@ class LocationAPIController extends Controller
     public function store(Request $request)
     {
         $location = new Warehouse();
-        $location->name = $request->name;
+        $location->name = $request->name ?? '';
         $location->phone_number = $request->phone??'';
         $location->address = $request->address??'';
         $location->save();
@@ -113,7 +113,7 @@ class LocationAPIController extends Controller
         if(!$location) {
             return response()->json(['message' => 'Location not found'], 404);
         }
-        $location->name = $request->name;
+        $location->name = $request->name ?? '';
         $location->phone_number = $request->phone??'';
         $location->address = $request->address??'';
         $location->save();

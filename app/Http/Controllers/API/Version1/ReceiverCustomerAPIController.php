@@ -64,7 +64,7 @@ class ReceiverCustomerAPIController extends Controller
     public function store(Request $request)
     {
         $receiverCustomer = new ReceiverCustomer();
-        $receiverCustomer->name = $request->name;
+        $receiverCustomer->name = $request->name ?? '';
         $receiverCustomer->phone = $request->phone ?? '';
         $receiverCustomer->address = $request->address ?? '';
         $receiverCustomer->location = $request->location ?? '';

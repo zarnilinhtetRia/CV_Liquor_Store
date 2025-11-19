@@ -114,7 +114,7 @@ class SenderCustomerAPIController extends Controller
         if (!$senderCustomer) {
             return response()->json(['message' => 'Sender customer not found'], 404);
         }
-        $senderCustomer->name = $request->name;
+        $senderCustomer->name = $request->name ?? '';
         $senderCustomer->phone = $request->phone ?? '';
         $senderCustomer->address = $request->address ?? '';
         $senderCustomer->location = $request->location ?? '';

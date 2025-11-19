@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 // use Intervention\Image\Facades\Image;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Facades\Validator;
@@ -37,8 +38,12 @@ class LoginAPIController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return response()->json($users);
+        try {
+            $users = User::all();
+            return response()->json($users);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 404);
+        }
     }
 
     /**
@@ -79,8 +84,8 @@ class LoginAPIController extends Controller
         try {
         // Validate the request data
         $validated = $request->validate([
-            'account_id' => 'required',
-            'type' => 'required|string',
+                'account_id' => 'nullable',
+                'type' => 'nullable|string',
             'profile_photo1' => 'nullable|image|mimes:jpg,jpeg,png',
             'profile_photo2' => 'nullable|image|mimes:jpg,jpeg,png',
             'profile_photo3' => 'nullable|image|mimes:jpg,jpeg,png',
@@ -207,19 +212,19 @@ class LoginAPIController extends Controller
         }
         try {
             $validated = $request->validate([
-                'account_id' => 'required',
-                'type' => 'required|string',
-                'profile_photo1' => 'nullable|image|mimes:jpg,jpeg,png',
-                'profile_photo2' => 'nullable|image|mimes:jpg,jpeg,png',
-                'profile_photo3' => 'nullable|image|mimes:jpg,jpeg,png',
-                'profile_photo4' => 'nullable|image|mimes:jpg,jpeg,png',
-                'name' => 'required|string|max:255',
+                'account_id' => 'nullable',
+                'type' => 'nullable|string',
+                // 'profile_photo1' => 'nullable|image|mimes:jpg,jpeg,png',
+                // 'profile_photo2' => 'nullable|image|mimes:jpg,jpeg,png',
+                // 'profile_photo3' => 'nullable|image|mimes:jpg,jpeg,png',
+                // 'profile_photo4' => 'nullable|image|mimes:jpg,jpeg,png',
+                'name' => 'nullable|string|max:255',
                 'email' => [
                     'required',
                     'email',
                     Rule::unique('users', 'email')->ignore($id),
                 ],
-                'password' => 'required|string|min:6|confirmed',
+                // 'password' => 'required|string|min:6|confirmed',
                 'father_name' => 'nullable|string|max:255',
                 'phno' => 'nullable|string|max:20',
                 'address' => 'nullable|string|max:500',
@@ -230,41 +235,41 @@ class LoginAPIController extends Controller
             $manager = new ImageManager(new Driver());
             $photos = [];
 
-            foreach (['profile_photo1', 'profile_photo2', 'profile_photo3', 'profile_photo4'] as $photoField) {
-                if ($request->hasFile($photoField)) {
-                    $file = $request->file($photoField);
-                    $filename = time() . '_' . $photoField . '.' . $file->getClientOriginalExtension();
-                    $directory = public_path('images/profiles/');
+            // foreach (['profile_photo1', 'profile_photo2', 'profile_photo3', 'profile_photo4'] as $photoField) {
+            //     if ($request->hasFile($photoField)) {
+            //         $file = $request->file($photoField);
+            //         $filename = time() . '_' . $photoField . '.' . $file->getClientOriginalExtension();
+            //         $directory = public_path('images/profiles/');
 
-                    if (!file_exists($directory)) {
-                        mkdir($directory, 0777, true);
-                    }
+            //         if (!file_exists($directory)) {
+            //             mkdir($directory, 0777, true);
+            //         }
 
-                    $path = $directory . $filename;
-                    $manager->read($file)
-                        ->scale(width: 400) // auto maintains aspect ratio
-                        ->resize(400, 400, function ($constraint) {
-                            $constraint->aspectRatio();
-                            $constraint->upsize();
-                        })
-                        ->save($path, quality: 75);
+            //         $path = $directory . $filename;
+            //         $manager->read($file)
+            //             ->scale(width: 400) // auto maintains aspect ratio
+            //             ->resize(400, 400, function ($constraint) {
+            //                 $constraint->aspectRatio();
+            //                 $constraint->upsize();
+            //             })
+            //             ->save($path, quality: 75);
 
-                    $photos[$photoField] =  $filename;
-                } else {
-                    $photos[$photoField] = null;
-                }
-            }
+            //         $photos[$photoField] =  $filename;
+            //     } else {
+            //         $photos[$photoField] = null;
+            //     }
+            // }
 
             $user->update([
                 'account_id' => $validated['account_id'],
                 'type' => $validated['type'],
-                'profile_photo1' => $photos['profile_photo1'],
-                'profile_photo2' => $photos['profile_photo2'],
-                'profile_photo3' => $photos['profile_photo3'],
-                'profile_photo4' => $photos['profile_photo4'],
-                'name' => $validated['name'],
+                // 'profile_photo1' => $photos['profile_photo1'],
+                // 'profile_photo2' => $photos['profile_photo2'],
+                // 'profile_photo3' => $photos['profile_photo3'],
+                // 'profile_photo4' => $photos['profile_photo4'],
+                'name' => $validated['name'] ?? "",
                 'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
+                // 'password' => Hash::make($validated['password']),
                 'father_name' => $validated['father_name'] ?? null,
                 'phno' => $validated['phno'] ?? null,
                 'address' => $validated['address'] ?? null,
@@ -409,10 +414,57 @@ class LoginAPIController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+        try {
+            $user = User::find($id);
+            if (!$user) {
+                return response()->json(['message' => 'User not found'], 404);
+            }
+            return response()->json(['message' => 'User retrieved successfully', 'user' => $user]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'data' => []]);
         }
-        return response()->json(['message' => 'User retrieved successfully', 'user' => $user]);
+    }
+
+    /**
+     * @OA\Get(
+     *     path="/api/v1/user_logout",
+     *     summary="Logout a user",
+     *     tags={"User"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="User logged out successfully"
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthorized"
+     *     )
+     * )
+     */
+    public function logout(Request $request)
+    {
+        try {
+            Auth::guard('web')->logout();
+
+            return response()->json(['message' => 'User logged out successfully'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 401);
+        }
+    }
+    public function change_password($id, Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'password' => 'required|string|min:6|confirmed',
+            ]);
+            $user = User::find($id);
+            if (!$user) {
+                return response()->json(['message' => 'User not found'], 404);
+            }
+            $user->password = Hash::make($validated['password']);
+            $user->update();
+            return response()->json(['message' => 'Password changed successfully', 'user' => $user]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'data' => []]);
+        }
     }
 }

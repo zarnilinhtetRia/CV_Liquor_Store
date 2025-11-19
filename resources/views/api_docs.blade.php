@@ -533,17 +533,17 @@
     <span class="json-key">"type"</span>: <span class="json-string">"Manager"</span>,<br />
     <span class="json-key">"name"</span>: <span class="json-string">"John Doe Updated"</span>,<br />
     <span class="json-key">"email"</span>: <span class="json-string">"john.doe@example.com"</span>,<br />
-    <span class="json-key">"password"</span>: <span class="json-string">"password123"</span>,<br />
-    <span class="json-key">"password_confirmation"</span>: <span class="json-string">"password123"</span>,<br />
+    {{-- <span class="json-key">"password"</span>: <span class="json-string">"password123"</span>,<br />
+    <span class="json-key">"password_confirmation"</span>: <span class="json-string">"password123"</span>,<br />--}}
     <span class="json-key">"father_name"</span>: <span class="json-string">"John Smith"</span>,<br />
     <span class="json-key">"phno"</span>: <span class="json-string">"1234567890"</span>,<br />
     <span class="json-key">"address"</span>: <span class="json-string">"123 Main St, City, Country"</span>,<br />
     <span class="json-key">"location"</span>: <span class="json-number">1</span>,<br />
     <span class="json-key">"social_media"</span>: <span class="json-string">"http://facebook.com/johndoe"</span>,<br />
-    <span class="json-key">"profile_photo1"</span>: <span class="json-string">(file - jpg,jpeg,png)</span>,<br />
+    {{-- <span class="json-key">"profile_photo1"</span>: <span class="json-string">(file - jpg,jpeg,png)</span>,<br />
     <span class="json-key">"profile_photo2"</span>: <span class="json-string">(file - jpg,jpeg,png)</span>,<br />
     <span class="json-key">"profile_photo3"</span>: <span class="json-string">(file - jpg,jpeg,png)</span>,<br />
-    <span class="json-key">"profile_photo4"</span>: <span class="json-string">(file - jpg,jpeg,png)</span><br />
+    <span class="json-key">"profile_photo4"</span>: <span class="json-string">(file - jpg,jpeg,png)</span><br /> --}}
 }
                                 </div>
                             </div>
@@ -556,16 +556,16 @@
 
                                 <span class="json-key">"name"</span> - Full name (required, string)<br />
                                 <span class="json-key">"email"</span> - Email address (required, valid email, unique)<br />
-                                <span class="json-key">"password"</span> - Password (required, string, min 6 chars, must be confirmed)<br />
+                                {{-- <span class="json-key">"password"</span> - Password (required, string, min 6 chars, must be confirmed)<br /> --}}
                                 <span class="json-key">"father_name"</span> - Father's name (optional, string)<br />
                                 <span class="json-key">"phno"</span> - Phone number (optional, string)<br />
                                 <span class="json-key">"address"</span> - Address (optional, string)<br />
                                 <span class="json-key">"location"</span> - Location ID (optional, integer)<br />
                                 <span class="json-key">"social_media"</span> - Social media link (optional, string)<br />
-                                <span class="json-key">"profile_photo1"</span> - Profile images (optional, jpg/jpeg/png only)<br />
+                                {{-- <span class="json-key">"profile_photo1"</span> - Profile images (optional, jpg/jpeg/png only)<br />
                                 <span class="json-key">"profile_photo2"</span> - Profile images (optional, jpg/jpeg/png only)<br />
                                 <span class="json-key">"profile_photo3"</span> - Profile images (optional, jpg/jpeg/png only)<br />
-                                <span class="json-key">"profile_photo4"</span> - Profile images (optional, jpg/jpeg/png only)<br />
+                                <span class="json-key">"profile_photo4"</span> - Profile images (optional, jpg/jpeg/png only)<br /> --}}
                             </div>
                         </div>
                     </div>
@@ -592,6 +592,41 @@
                         <i class="fas fa-chevron-down expand-icon"></i>
                     </div>
                 </div>
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-post">POST</span>
+                            <span class="endpoint-path">/api/v1/change_password/{id}</span>
+                            <span class="endpoint-description">Change password of a user by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                    <div class="endpoint-details">
+                        <div class="request-sample">
+                            <h4><i class="fas fa-code"></i> Request Sample</h4>
+                            <div class="code-container">
+                                <button class="copy-button" onclick="copyToClipboard(this, 'change_password')">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                                <div class="code-block" id="change_password">
+{ <br />
+<span class="json-key">"password"</span>: <span class="json-string">"new-password"</span>, <br />
+<span class="json-key">"password_confirmation"</span>: <span class="json-string">"new-password"</span> <br />
+}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-sample">
+                            <h4><i class="fas fa-info-circle"></i> Field Requirements</h4>
+                            <div class="code-block">
+                                <span class="json-key">"password"</span> - New password (required, string, min 6 chars, must be confirmed)<br />
+                                <span class="json-key">"password_confirmation"</span> - Confirm new password (required, string)<br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="endpoint-item" onclick="toggleEndpoint(this)">
                     <div class="endpoint-header">
@@ -618,6 +653,18 @@
                                 </div>
                             </div>
                         </div>
+
+                    </div>
+
+                 </div>
+                 <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-delete">POST</span>
+                            <span class="endpoint-path">/api/v1/user_logout</span>
+                            <span class="endpoint-description">User logout</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
                     </div>
                 </div>
             </div>
@@ -865,6 +912,352 @@
                 </div>
             </div>
         </div>
+
+
+           <div class="api-section">
+            <div class="section-header">
+                <i class="fas fa-shopping-bag"></i>
+                <h2>Order Management APIs</h2>
+            </div>
+            <div class="endpoint-list">
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/v1/orders</span>
+                            <span class="endpoint-description">Retrieve a list of all orders</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-post">POST</span>
+                            <span class="endpoint-path">/api/v1/order_register</span>
+                            <span class="endpoint-description">Register a new Order</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                    <div class="endpoint-details">
+                        <div class="request-sample">
+                            <h4><i class="fas fa-code"></i> Request Sample</h4>
+                              <div class="code-container">
+                                <button class="copy-button" onclick="copyToClipboard(this, 'order_register')">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                                <div class="code-block" id="order_register">
+{</br />
+    <span class="json-key">"shop_id"</span>: <span class="json-string">"1"</span>,<br />
+    <span class="json-key">"manager_id"</span>: <span class="json-string">"2"</span>,<br />
+    <span class="json-key">"order_id"</span>: <span class="json-string">"order-1"</span>,<br />
+    {{-- <span class="json-key">"order_status"</span>: <span class="json-string">"pending"</span>,<br /> --}}
+    <span class="json-key">"order_date"</span>: <span class="json-string">"01-01-2025"</span>,<br />
+    <span class="json-key">"sender_id"</span>: <span class="json-string">"3"</span>,<br />
+    <span class="json-key">"receiver_id"</span>: <span class="json-string">"4"</span>,<br />
+    <span class="json-key">"order_weight"</span>: <span class="json-string">"50kg"</span>,<br />
+    <span class="json-key">"sub_amount"</span>: <span class="json-string">"50000"</span>,<br />
+    <span class="json-key">"parcel_price"</span>: <span class="json-string">"3000"</span>,<br />
+    <span class="json-key">"code_price"</span>: <span class="json-string">"3000"</span>,<br />
+    <span class="json-key">"total_amount"</span>: <span class="json-string">"56000"</span>,<br />
+    <span class="json-key">"order_type"</span>: <span class="json-string">"type of order"</span>,<br />
+    <span class="json-key">"note"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"cash_status"</span>: <span class="json-string">""</span><br />
+    {{-- <span class="json-key">"order_photo1"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"order_photo2"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"order_photo3"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"order_photo4"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"order_photo5"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"order_photo6"</span>: <span class="json-string">""</span><br /> --}}
+}
+                            </div>
+                        </div>
+                        </div>
+                        <div class="request-sample">
+                            <h4><i class="fas fa-info-circle"></i> Field Requirements</h4>
+                            <div class="code-block">
+                                <span class="json-key">"shop_id"</span> - Location ID (required)<br />
+                                <span class="json-key">"manager_id"</span> - Contact phone number (required)<br />
+                                <span class="json-key">"order_id"</span> - Order ID (required)<br />
+                                <span class="json-key">"order_status"</span> - Order status (required)<br />
+                                <span class="json-key">"order_date"</span> - Order Date (required)<br />
+                                <span class="json-key">"sender_id"</span> - Sender Customer ID (required)<br />
+                                <span class="json-key">"receiver_id"</span> - Receiver Customer ID (required)<br />
+                                <span class="json-key">"order_weight"</span> - Order Weight (required)<br />
+                                <span class="json-key">"sub_amount"</span> - Sub Amount of the order (required)<br />
+                                <span class="json-key">"parcel_price"</span> - Parcel Price (required)<br />
+                                <span class="json-key">"code_price"</span> - Code Price (required)<br />
+                                <span class="json-key">"total_amount"</span> - Total Amount (required)<br />
+                                <span class="json-key">"order_type"</span> - Order Type (required)<br />
+                                <span class="json-key">"note"</span> - Note (optional)<br />
+                                <span class="json-key">"cash_status"</span> - Cash Status (optional)<br />
+                                <span class="json-key">"order_photo1"</span> - Order Photo 1 (optional)<br />
+                                <span class="json-key">"order_photo2"</span> - Order Photo 2 (optional)<br />
+                                <span class="json-key">"order_photo3"</span> - Order Photo 3 (optional)<br />
+                                <span class="json-key">"order_photo4"</span> - Order Photo 4 (optional)<br />
+                                <span class="json-key">"order_photo5"</span> - Order Photo 5 (optional)<br />
+                                <span class="json-key">"order_photo6"</span> - Order Photo 6 (optional)<br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-put">PUT</span>
+                            <span class="endpoint-path">/api/v1/order_update/{id}</span>
+                            <span class="endpoint-description">Update an existing Order by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                    <div class="endpoint-details">
+                        <div class="request-sample">
+                            <h4><i class="fas fa-code"></i> Request Sample</h4>
+                            <div class="code-container">
+                                <button class="copy-button" onclick="copyToClipboard(this, 'order_update')">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                                <div class="code-block" id="order_update">
+{</br />
+    <span class="json-key">"shop_id"</span>: <span class="json-string">"1"</span>,<br />
+    <span class="json-key">"manager_id"</span>: <span class="json-string">"2"</span>,<br />
+    <span class="json-key">"order_id"</span>: <span class="json-string">"order-1"</span>,<br />
+    {{-- <span class="json-key">"order_status"</span>: <span class="json-string">"pending"</span>,<br /> --}}
+    <span class="json-key">"order_date"</span>: <span class="json-string">"01-01-2025"</span>,<br />
+    <span class="json-key">"sender_id"</span>: <span class="json-string">"3"</span>,<br />
+    <span class="json-key">"receiver_id"</span>: <span class="json-string">"4"</span>,<br />
+    <span class="json-key">"order_weight"</span>: <span class="json-string">"50kg"</span>,<br />
+    <span class="json-key">"sub_amount"</span>: <span class="json-string">"50000"</span>,<br />
+    <span class="json-key">"parcel_price"</span>: <span class="json-string">"3000"</span>,<br />
+    <span class="json-key">"code_price"</span>: <span class="json-string">"3000"</span>,<br />
+    <span class="json-key">"total_amount"</span>: <span class="json-string">"56000"</span>,<br />
+    <span class="json-key">"order_type"</span>: <span class="json-string">"type of order"</span>,<br />
+    <span class="json-key">"note"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"cash_status"</span>: <span class="json-string">""</span>,<br />
+    {{-- <span class="json-key">"order_photo1"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"order_photo2"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"order_photo3"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"order_photo4"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"order_photo5"</span>: <span class="json-string">""</span>,<br />
+    <span class="json-key">"order_photo6"</span>: <span class="json-string">""</span><br /> --}}
+}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-sample">
+                            <h4><i class="fas fa-info-circle"></i> Field Requirements</h4>
+                            <div class="code-block">
+                                <span class="json-key">"shop_id"</span> - Location ID (required)<br />
+                                <span class="json-key">"manager_id"</span> - Contact phone number (required)<br />
+                                <span class="json-key">"order_id"</span> - Order ID (required)<br />
+                                {{-- <span class="json-key">"order_status"</span> - Order status (required)<br /> --}}
+                                <span class="json-key">"order_date"</span> - Order Date (required)<br />
+                                <span class="json-key">"sender_id"</span> - Sender Customer ID (required)<br />
+                                <span class="json-key">"receiver_id"</span> - Receiver Customer ID (required)<br />
+                                <span class="json-key">"order_weight"</span> - Order Weight (required)<br />
+                                <span class="json-key">"sub_amount"</span> - Sub Amount of the order (required)<br />
+                                <span class="json-key">"parcel_price"</span> - Parcel Price (required)<br />
+                                <span class="json-key">"code_price"</span> - Code Price (required)<br />
+                                <span class="json-key">"total_amount"</span> - Total Amount (required)<br />
+                                <span class="json-key">"order_type"</span> - Order Type (required)<br />
+                                <span class="json-key">"note"</span> - Note (optional)<br />
+                                <span class="json-key">"cash_status"</span> - Cash Status (optional)<br />
+                                {{-- <span class="json-key">"order_photo1"</span> - Order Photo 1 (optional)<br />
+                                <span class="json-key">"order_photo2"</span> - Order Photo 2 (optional)<br />
+                                <span class="json-key">"order_photo3"</span> - Order Photo 3 (optional)<br />
+                                <span class="json-key">"order_photo4"</span> - Order Photo 4 (optional)<br />
+                                <span class="json-key">"order_photo5"</span> - Order Photo 5 (optional)<br />
+                                <span class="json-key">"order_photo6"</span> - Order Photo 6 (optional)<br /> --}}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/v1/order_show/{id}</span>
+                            <span class="endpoint-description">Retrieve a specific Order by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/v1/order_destroy/{id}</span>
+                            <span class="endpoint-description">Delete a Order by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-post">POST</span>
+                            <span class="endpoint-path">/api/v1/change_order_status/{id}</span>
+                            <span class="endpoint-description">Change Status Of Order by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                     <div class="endpoint-details">
+                        <div class="request-sample">
+                            <h4><i class="fas fa-code"></i> Request Sample</h4>
+                            <div class="code-container">
+                                <button class="copy-button" onclick="copyToClipboard(this, 'update_status')">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                                <div class="code-block" id="update_status">
+{</br />
+    <span class="json-key">"order_status"</span>: <span class="json-string">"Delivered"</span><br />
+
+}
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+         <div class="api-section">
+            <div class="section-header">
+                <i class="fas fa-history"></i>
+                <h2>Track History Management APIs</h2>
+            </div>
+            <div class="endpoint-list">
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/v1/track_histories</span>
+                            <span class="endpoint-description">Retrieve a list of all track histories</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-post">POST</span>
+                            <span class="endpoint-path">/api/v1/track_history_register</span>
+                            <span class="endpoint-description">Register a new track history</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                    <div class="endpoint-details">
+                        <div class="request-sample">
+                            <h4><i class="fas fa-code"></i> Request Sample</h4>
+                              <div class="code-container">
+                                <button class="copy-button" onclick="copyToClipboard(this, 'track_history_register')">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                                <div class="code-block" id="track_history_register">
+{</br />
+    <span class="json-key">"track_id"</span>: <span class="json-string">"track_1"</span>,<br />
+    <span class="json-key">"order_id"</span>: <span class="json-string">"order_1"</span>,<br />
+    <span class="json-key">"title"</span>: <span class="json-string">"track title"</span>,<br />
+    <span class="json-key">"staff_name"</span>: <span class="json-string">"staff name"</span>,<br />
+    <span class="json-key">"role"</span>: <span class="json-string">"Staff"</span>,<br />
+    <span class="json-key">"status"</span>: <span class="json-string">"pending"</span><br />
+}
+                            </div>
+                        </div>
+                        </div>
+                        <div class="request-sample">
+                            <h4><i class="fas fa-info-circle"></i> Field Requirements</h4>
+                            <div class="code-block">
+                                <span class="json-key">"track_id"</span> - Track ID (required)<br />
+                                <span class="json-key">"order_id"</span> - Order ID (required)<br />
+                                <span class="json-key">"title"</span> - Track History Title (optional)<br />
+                                <span class="json-key">"staff_name"</span> - Name (required)<br />
+                                <span class="json-key">"role"</span> - Role (required)<br /><span class="json-key">"status"</span> - Status (required)<br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-put">PUT</span>
+                            <span class="endpoint-path">/api/v1/track_history_update/{id}</span>
+                            <span class="endpoint-description">Update an existing track history by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                    <div class="endpoint-details">
+                        <div class="request-sample">
+                            <h4><i class="fas fa-code"></i> Request Sample</h4>
+                            <div class="code-container">
+                                <button class="copy-button" onclick="copyToClipboard(this, 'track_history_update')">
+                                    <i class="fas fa-copy"></i>
+                                    <span>Copy</span>
+                                </button>
+                                <div class="code-block" id="track_history_update">
+{</br />
+    <span class="json-key">"track_id"</span>: <span class="json-string">"track_1"</span>,<br />
+    <span class="json-key">"order_id"</span>: <span class="json-string">"order_1"</span>,<br />
+    <span class="json-key">"title"</span>: <span class="json-string">"updated track title"</span>,<br />
+    <span class="json-key">"staff_name"</span>: <span class="json-string">"staff name"</span>,<br />
+    <span class="json-key">"role"</span>: <span class="json-string">"Staff"</span>,<br />
+    <span class="json-key">"status"</span>: <span class="json-string">"delivered"</span><br />
+}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="request-sample">
+                            <h4><i class="fas fa-info-circle"></i> Field Requirements</h4>
+                            <div class="code-block">
+                              <span class="json-key">"track_id"</span> - Track ID (required)<br />
+                              <span class="json-key">"order_id"</span> - Order ID (required)<br />
+                                <span class="json-key">"title"</span> - Track History Title (optional)<br />
+                                <span class="json-key">"staff_name"</span> - Name (required)<br />
+                                <span class="json-key">"role"</span> - Role (required)<br /><span class="json-key">"status"</span> - Status (required)<br />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-get">GET</span>
+                            <span class="endpoint-path">/api/v1/track_history_show/{id}</span>
+                            <span class="endpoint-description">Retrieve a specific Track History by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+
+                <div class="endpoint-item" onclick="toggleEndpoint(this)">
+                    <div class="endpoint-header">
+                        <div class="endpoint-info">
+                            <span class="method-badge method-delete">DELETE</span>
+                            <span class="endpoint-path">/api/v1/track_history_destroy/{id}</span>
+                            <span class="endpoint-description">Delete a Track History by ID</span>
+                        </div>
+                        <i class="fas fa-chevron-down expand-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
 
