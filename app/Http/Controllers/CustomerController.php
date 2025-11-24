@@ -17,18 +17,15 @@ class CustomerController extends Controller
     public function index()
     {
 
-        $warehousePermission = auth()->user()->level ? json_decode(auth()->user()->level) : [];
-
-        if (auth()->user()->is_admin == '1') {
-            $customers = Customer::latest()->get();
-            $branchs = Warehouse::select('name', 'id')->get();
-        } else {
-            $customers = Customer::whereIn('branch', $warehousePermission)->latest()->get();
-            $branchs = Warehouse::select('name', 'id')->get();
-        }
 
 
-        return view('customer.customer', compact('customers', 'branchs'));
+
+        $customers = Customer::latest()->get();
+
+
+
+
+        return view('customer.customer', compact('customers'));
     }
 
     public function credit(Request $request, $id)
@@ -126,7 +123,7 @@ class CustomerController extends Controller
                     'phno' => 'nullable',
                     'type' => 'nullable',
                     'address' => 'nullable',
-                    'branch' => 'required',
+
                     'email' => 'nullable',
                 ],
                 ['type.required' => 'Customer Type is required']
@@ -142,8 +139,8 @@ class CustomerController extends Controller
     public function edit(Request $request, $id)
     {
         $showCustomer = Customer::find($id);
-        $branchs = Warehouse::select('name', 'id')->get();
-        return view('customer.customer_edit', compact('showCustomer', 'branchs'));
+
+        return view('customer.customer_edit', compact('showCustomer'));
     }
     public function update($id, Request $request)
     {
@@ -157,45 +154,5 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
         $customer->delete();
         return redirect('customer')->with('success', 'Customer Deleted Successful!');
-    }
-
-    public function fileImport(Request $request)
-    {
-        try {
-            $request->validate([
-                'warehouse_id' => 'required',
-                'file' => 'required_if:warehouse_id,import|file|mimes:xlsx,xls,csv',
-            ], [
-                'file.required_if' => 'Please upload a file for import.',
-                'file.file' => 'The uploaded file must be valid.',
-                'file.mimes' => 'The file must be an Excel or CSV format.',
-            ]);
-
-            $file = $request->file('file');
-            $warehouseId = $request->warehouse_id;
-
-            $import = new CustomerImport($warehouseId);
-            Excel::import($import, $file->store('temp'));
-
-            return response()->json(['status' => 'success', 'message' => 'File Import Successful!']);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
-        }
-    }
-
-    public function fileExport(Request $request)
-    {
-        try {
-            $warehouseId = $request->warehouse_id;
-
-            return Excel::download(new CustomerExport($warehouseId), 'customers.xlsx');
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'An error occurred during export: ' . $e->getMessage()], 500);
-        }
-    }
-
-    public function fileImportTemplate()
-    {
-        return Excel::download(new CustomerImporttemplate, 'customers.xlsx');
     }
 }

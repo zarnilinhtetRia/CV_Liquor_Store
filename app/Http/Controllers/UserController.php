@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use App\Models\Credit;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\UploadCoinHistory;
 use App\Models\UserType;
@@ -142,5 +143,10 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+    public function order()
+    {
+        $orders = Order::all();
+        return view('user.order', compact('orders'));
     }
 }

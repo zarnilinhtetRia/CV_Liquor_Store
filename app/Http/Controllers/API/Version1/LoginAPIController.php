@@ -467,4 +467,49 @@ class LoginAPIController extends Controller
             return response()->json(['message' => $e->getMessage(), 'data' => []]);
         }
     }
+    public function change_profile($id, Request $request)
+    {
+        try {
+            $user = User::find($id);
+            if (!$user) {
+                return response()->json(['message' => 'User not found'], 404);
+            }
+            $manager = new ImageManager(new Driver());
+            $photos = [];
+
+            foreach (['profile_photo1', 'profile_photo2', 'profile_photo3', 'profile_photo4'] as $photoField) {
+                if ($request->hasFile($photoField)) {
+                    $file = $request->file($photoField);
+                    $filename = time() . '_' . $photoField . '.' . $file->getClientOriginalExtension();
+                    $directory = public_path('images/profiles/');
+
+                    if (!file_exists($directory)) {
+                        mkdir($directory, 0777, true);
+                    }
+
+                    $path = $directory . $filename;
+                    $manager->read($file)
+                        ->scale(width: 400) // auto maintains aspect ratio
+                        ->resize(400, 400, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        })
+                        ->save($path, quality: 75);
+
+                    $photos[$photoField] =  $filename;
+                } else {
+                    $photos[$photoField] = null;
+                }
+            }
+            $user->update([
+                'profile_photo1' => $photos['profile_photo1'],
+                'profile_photo2' => $photos['profile_photo2'],
+                'profile_photo3' => $photos['profile_photo3'],
+                'profile_photo4' => $photos['profile_photo4'],
+            ]);
+            return response()->json(['message' => 'Profile updated successfully', 'user' => $user]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage(), 'data' => []]);
+        }
+    }
 }

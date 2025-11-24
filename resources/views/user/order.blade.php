@@ -164,83 +164,61 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>No.</th>
-                                            <th>Name</th>
-                                            <th>Photo</th>
-                                            <th>Email</th>
-                                            <th>Type</th>
-                                            <th>Location</th>
-                                            <th>Date</th>
+                                        <th>ID</th>
+                                        <th>Order ID</th>
+                                        <th>Order Status</th>
 
-                                            <th>Action</th>
+                                        <th>Sender ID</th>
+                                        <th>Receiver ID</th>
+                                        <th>Order Photo 1</th>
+                                        <th>Order Photo 2</th>
+                                        <th>Order Photo 3</th>
+                                        <th>Order Photo 4</th>
+                                        <th>Order Photo 5</th>
+                                        <th>Order Photo 6</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php
                                             $no = '1';
                                         @endphp
-                                        @foreach ($showUser_datas as $showUser)
+                                        @foreach ($orders as $order)
                                             <tr>
-                                                <td>{{ $no }}</td>
-                                                <td>{{ $showUser->name }}</td>
-                                                <td>@if($showUser->profile_photo1)<img src="{{ asset('images/profiles/' . $showUser->profile_photo1) }}" alt="Profile Photo" width="50">@endif
-                                                @if($showUser->profile_photo2)<img src="{{ asset('images/profiles/' . $showUser->profile_photo2) }}" alt="Profile Photo" width="50">@endif
-                                                @if($showUser->profile_photo3)<img src="{{ asset('images/profiles/' . $showUser->profile_photo3) }}" alt="Profile Photo" width="50">@endif
-                                                @if($showUser->profile_photo4)<img src="{{ asset('images/profiles/' . $showUser->profile_photo4) }}" alt="Profile Photo" width="50">@endif </td>
-                                                <td>{{ $showUser->email }}</td>
-                                                <td>
-                                                    @if ($showUser->user_type_id)
-                                                        {{ $showUser->userType->name }}
-                                                    @endif
+                                                <td>{{ $order->id }}</td>
 
-                                                </td>
-                                                <td>
-                                                    @php
-                                                        $levelIds = json_decode($showUser->level, true); //
-                                                    @endphp
+                                                <td>{{ $order->order_id }}</td>
+                                                <td>{{ $order->order_status }}</td>
 
-                                                    @if (is_array($levelIds) && count($levelIds) > 0)
-                                                        @foreach ($levelIds as $key => $levelId)
-                                                            @foreach ($branchs as $branch)
-                                                                @if ($levelId == $branch->id)
-                                                                    {{ $branch->name }}
-                                                                    @if ($key < count($levelIds) - 1)
-                                                                        ,
-                                                                    @endif
-                                                                @endif
-                                                            @endforeach
-                                                        @endforeach
-                                                    @else
-                                                        {{ $showUser->level }}
+                                                <td>{{ $order->sender_id }}</td>
+                                                <td>{{ $order->receiver_id }}</td>
+                                                
+                                                <td> @if($order->order_photo1)
+                                                    <img src="{{ asset('images/orders/'.$order->order_photo1) }}" width="50" alt="Order Photo 1">
                                                     @endif
                                                 </td>
-
-
-                                                <td>{{ $showUser->created_at }}</td>
                                                 <td>
-
-                                                    @if (in_array('User Permission', $choosePermission) || auth()->user()->is_admin == '1')
-                                                        <a href="{{ url('user_permission', $showUser->id) }}"
-                                                            class="btn btn-warning">
-                                                            <i
-                                                                class="fa-solid fa-person-circle-question text-white"></i>
-
-                                                        </a>
+                                                    @if($order->order_photo2)
+                                                    <img src="{{ asset('images/orders/'.$order->order_photo2) }}" width="50" alt="Order Photo 2">
                                                     @endif
-
-                                                    @if (in_array('User Edit', $choosePermission) || auth()->user()->is_admin == '1')
-                                                        <a href="{{ url('userShow', $showUser->id) }}"
-                                                            class="btn btn-success">
-                                                            <i class="fa-solid fa-pen-to-square"></i>
-
-                                                        </a>
+                                                </td>
+                                                <td>
+                                                    @if($order->order_photo3)
+                                                    <img src="{{ asset('images/orders/'.$order->order_photo3) }}" width="50" alt="Order Photo 3">
                                                     @endif
-
-                                                    @if (in_array('User Delete', $choosePermission) || auth()->user()->is_admin == '1')
-                                                        <a href="{{ url('delete_user', $showUser->id) }}"
-                                                            class="btn btn-danger"
-                                                            onclick="return confirm('Are you sure you want to delete this user ?')">
-                                                            <i class="fa-solid fa-trash"></i></a>
+                                                </td>
+                                                <td>
+                                                    @if($order->order_photo4)
+                                                    <img src="{{ asset('images/orders/'.$order->order_photo4) }}" width="50" alt="Order Photo 4">
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($order->order_photo5)
+                                                    <img src="{{ asset('images/orders/'.$order->order_photo5) }}" width="50" alt="Order Photo 5">
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($order->order_photo6)
+                                                    <img src="{{ asset('images/orders/'.$order->order_photo6) }}" width="50" alt="Order Photo 6">
                                                     @endif
                                                 </td>
                                             </tr>
@@ -248,7 +226,6 @@
                                                 $no++;
                                             @endphp
                                         @endforeach
-
                                     </tbody>
 
                                 </table>

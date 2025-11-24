@@ -17,11 +17,11 @@ class Admin extends Seeder
     {
         User::create([
             'name' => 'Admin',
-            'email' => 'admin@admin.com',
+            'email' => 'codeverse@admin.com',
             'email_verified_at' => now(),
             'type' => 'Admin',
             'level' => 'Default',
-            'password' => bcrypt('admin'), // passwrod
+            'password' => bcrypt('codeverseadmin'), // passwrod
             'is_admin' => 1
         ]);
     }

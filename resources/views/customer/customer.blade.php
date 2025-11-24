@@ -175,47 +175,6 @@
 
                                                 </select>
                                             </div>
-
-                                            @if (auth()->user()->is_admin == '1')
-                                                <div class="form-group">
-                                                    <label for="branch">Location<span
-                                                            class="text-danger">*</span></label>
-
-                                                    <select name="branch" id="branch" class="form-control"
-                                                        required>
-                                                        <option value="" selected disabled>Select Location
-                                                        </option>
-                                                        @foreach ($branchs as $branch)
-                                                            <option value="{{ $branch->id }}">{{ $branch->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            @else
-                                                <div class="form-group">
-                                                    <label for="branch">Location<span
-                                                            class="text-danger">*</span></label>
-
-                                                    <select name="branch" id="branch" class="form-control"
-                                                        required>
-                                                        @php
-                                                            $userPermissions = auth()->user()->level
-                                                                ? json_decode(auth()->user()->level)
-                                                                : [];
-                                                        @endphp
-                                                        <option value="" selected disabled>Select Location
-                                                        </option>
-                                                        @foreach ($branchs as $branch)
-                                                            @if (in_array($branch->id, $userPermissions))
-                                                                <option value="{{ $branch->id }}">
-                                                                    {{ $branch->name }}
-                                                                </option>
-                                                            @endif
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            @endif
-
                                             <div class="form-group">
                                                 <label for="address">Address</label>
                                                 <input type="text" class="form-control" id="phone number"
@@ -236,40 +195,7 @@
                     </div>
                     <!-- /.modal -->
                     <div class="mt-3 col-md-12">
-                        <div class="ml-2 col row d-flex">
-                            <form id="fileImportForm" action="{{ route('customer_file_export') }}" method="GET"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <div class="mb-4 form-group" style="max-width: 500px; margin: 0 auto;">
-                                    <div class="text-left custom-file">
 
-                                        <label for="warehouse">Choose Location</label>
-                                        <select name="warehouse_id" id="warehouse" class="form-control warehouse"
-                                            required>
-                                            <option value="All Location" selected>All Location</option>
-                                            @foreach ($branchs as $warehouse)
-                                                <option value="{{ $warehouse->id }}">{{ $warehouse->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-
-
-
-                                        <div class="p-1 mt-2 text-left custom-file col"
-                                            style="border:#d0d0db 1px solid; background-color: white">
-                                            <input type="file" name="file" class="" id="customFile">
-                                        </div>
-
-                                        <button type="button" class="mt-3 btn btn-primary"
-                                            id="importBtn">Import</button>
-                                        <button type="submit" class="mt-3 btn btn-success"
-                                            id="exportBtn">Export</button>
-                                    </div>
-                                </div>
-                                <a href="{{ route('customer_file_import_template') }}">Download Import CSV
-                                    Template</a>
-                            </form>
-                        </div>
                         <div class="card ">
                             <div class="card-header">
                                 <h3 class="card-title">Customer List</h3>
@@ -281,16 +207,10 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            {{-- <th>Customer Id</th> --}}
                                             <th>Name</th>
                                             <th>Phone Number</th>
                                             <th>Email</th>
-                                            {{-- <th>Customer Type</th> --}}
-                                            <th>Location</th>
                                             <th>Address</th>
-                                            <th>Total</th>
-                                            <th>Delivered Qty</th>
-                                            <th>Remain Qty</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -314,19 +234,9 @@
                                                 </td>
                                                 <td>{{ $customer->phno }}</td>
                                                 <td>{{ $customer->email }}</td>
-                                                {{-- <td>{{ $customer->type }}</td> --}}
-                                                <td>
-                                                    @foreach ($branchs as $branch)
-                                                        @if ($branch->id == $customer->branch)
-                                                            {{ $branch->name }}
-                                                        @endif
-                                                    @endforeach
-                                                </td>
+
                                                 <td>{{ $customer->address }}</td>
-                                                <td>{{ number_format($inv->sum('total')) }}</td>
-                                                <td>{{ $sells->sum('delivered_qty') }}</td>
-                                                <td>{{ $sells->sum('product_qty') - $sells->sum('delivered_qty') }}
-                                                </td>
+
                                                 <td>
                                                     <div class="row">
                                                         @if (in_array('Customer Edit', $choosePermission) || auth()->user()->is_admin == '1')
@@ -408,44 +318,7 @@
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
 
-        //Excel Import
-        $(document).ready(function() {
-            $('#importBtn').on('click', function(e) {
-                e.preventDefault();
-                var formData = new FormData($('#fileImportForm')[
-                    0]);
-                $('#importBtn').prop('disabled', true);
-                $('#successMessage').html(
-                    '<div class="alert alert-info">Importing file... Please wait.</div>'
-                );
 
-                $.ajax({
-                    url: '{{ route('customer_file_import') }}',
-                    type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                            'content')
-                    },
-                    success: function(response) {
-                        $('#successMessage').html(
-                            '<div class="alert alert-success">File imported successfully!</div>'
-                        );
-                        window.location.reload();
-                    },
-                    error: function(xhr, status, error) {
-                        $('#successMessage').html(
-                            '<div class="alert alert-danger">Please Choose File!</div>'
-                        );
-                        $('#importBtn').prop('disabled', false);
-                        window.location.reload();
-
-                    }
-                });
-            });
-        });
     </script>
 
 
