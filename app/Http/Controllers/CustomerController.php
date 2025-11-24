@@ -115,44 +115,96 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-
         try {
+
             $validated = $request->validate(
                 [
-                    'name' => 'required',
-                    'phno' => 'nullable',
-                    'type' => 'nullable',
-                    'address' => 'nullable',
 
-                    'email' => 'nullable',
+
+                    // POS & Transaction Details
+                    'pos' => 'nullable',
+                    'date' => 'nullable',
+                    'time' => 'nullable',
+                    'cashier_id' => 'nullable',
+                    'cashier_name' => 'nullable',
+                    'receipt_no' => 'nullable',
+                    'transaction_no' => 'nullable',
+                    'reprinted_by' => 'nullable',
+                    'reprinted_datetime' => 'nullable',
+
+                    // Passenger / Travel Info
+                    'passport_no' => 'nullable',
+                    'nationality' => 'nullable',
+                    'flight_code' => 'nullable',
+
+                    // Item / Purchase Info
+                    'item_name' => 'nullable',
+                    'qty' => 'nullable|numeric',
+                    'price' => 'nullable|numeric',
+                    'discount' => 'nullable|numeric',
+                    'total' => 'nullable|numeric',
+
+                    // Summary Fields
+                    'sub_total' => 'nullable|numeric',
+                    'gst' => 'nullable|numeric',
+                    'total_items' => 'nullable|numeric',
+                    'total_discount' => 'nullable|numeric',
+                    'other_disc' => 'nullable|numeric',
+                    'final_total' => 'nullable|numeric',
+
+                    // Payment
+                    'cash' => 'nullable|numeric',
+                    'change_back' => 'nullable|numeric',
+                    'adjust' => 'nullable|numeric',
+
+                    // Member info
+                    'member_tier' => 'nullable',
+                    'tier_validity' => 'nullable',
+                    'nett_spend' => 'nullable',
+                    'issued_points' => 'nullable',
+
+                    // Points
+                    'py2025_bal' => 'nullable',
+                    'py2025_redeem' => 'nullable',
+                    'py2024_points' => 'nullable',
+                    'barcode' => 'nullable',
+
                 ],
-                ['type.required' => 'Customer Type is required']
+
             );
 
+            // Save the data
             Customer::create($validated);
 
-            return redirect()->back()->with('success', 'New Customer Added Successfully!');
+            return redirect()->back()->with('success', 'New Invoices Added Successfully!');
         } catch (\Exception $e) {
+
             return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
         }
     }
+
     public function edit(Request $request, $id)
     {
-        $showCustomer = Customer::find($id);
+        $data = Customer::find($id);
 
-        return view('customer.customer_edit', compact('showCustomer'));
+        return view('customer.customer_edit', compact('data'));
     }
     public function update($id, Request $request)
     {
         $customer = Customer::find($id);
         $customer->update($request->all());
-        $customers = Customer::latest()->get();
-        return redirect('customer')->with('success', 'Customer Updated Successful!');
+
+        return redirect('customer')->with('success', 'Invoices Updated Successful!');
     }
     public function delete($id)
     {
         $customer = Customer::find($id);
         $customer->delete();
-        return redirect('customer')->with('success', 'Customer Deleted Successful!');
+        return redirect('customer')->with('success', 'Invoices Deleted Successful!');
+    }
+    public function view($id)
+    {
+        $customer = Customer::find($id);
+        return view('customer.view', compact('customer'));
     }
 }

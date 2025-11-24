@@ -1,7 +1,7 @@
 <style>
     .main-sidebar {
         /* background: radial-gradient(circle, #4549aa, #d1413d); */
-        background: #092366;
+        background: #417EC1;
         font-family:
             "Times New Roman", serif;
 
@@ -43,14 +43,15 @@
                     }
                 @endphp
 
-            
+
                 @if (in_array('Customer', $userPermissions) || auth()->user()->is_admin == '1')
-                    <li class="nav-item">
-                        <a href="{{ url('/customer') }}" class="nav-link">
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
                             <i class="text-white fa-solid fa-user-plus nav-icon"></i>
                             <p class="pl-3 text-white">
-                                Customer</p>
-                            </p><i class="text-white right fas fa-angle-left"></i>
+                                Invoices
+                                <i class="text-white right fas fa-angle-left"></i>
+                            </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">

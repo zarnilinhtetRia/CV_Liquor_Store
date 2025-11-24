@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Liquar POS</title>
+    <title>Liquor POS</title>
 
     <!-- Google Font: Source Sans Pro -->
 
@@ -138,7 +138,7 @@
 
     .main-header {
         /* background: radial-gradient(circle, rgb(255, 100, 100), rgb(52, 52, 52)); */
-        background: #092366;
+        background: #417EC1;
 
     }
 

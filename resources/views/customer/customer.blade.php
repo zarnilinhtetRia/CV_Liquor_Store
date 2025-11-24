@@ -53,13 +53,13 @@
                     <div class="container-fluid">
                         <div class="mb-2 row">
                             <div class="col-sm-6">
-                                <h1>Customer List</h1>
+                                <h1>Invoices List</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="{{ url('/dashboard') }}">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item">Customer List
+                                    <li class="breadcrumb-item">Invoices List
                                     </li>
                                 </ol>
                             </div>
@@ -120,7 +120,7 @@
                         @if (in_array('Customer Register', $choosePermission) || auth()->user()->is_admin == '1')
                             <div> <button type="button" class=" btn btn-primary " data-toggle="modal"
                                     data-target="#modal-lg">
-                                    <i class="fa-solid fa-circle-plus"></i> Add Customer </button>
+                                    <i class="fa-solid fa-circle-plus"></i> Add Invoices </button>
 
                             </div>
                         @endif
@@ -131,10 +131,10 @@
 
 
                     <div class="modal fade" id="modal-lg">
-                        <div class="modal-dialog modal-md">
+                        <div class="modal-dialog modal-xl">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title"> Add Customer</h4>
+                                    <h4 class="modal-title"> Add Invoices</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -142,49 +142,224 @@
                                 <div class="modal-body">
                                     <form action="{{ url('customer_register') }}" method="POST">
                                         @csrf
-                                        <div class="card-body">
-
-
-
-                                            <div class="form-group">
-                                                <label for="name">Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name"
-                                                    placeholder="Enter Name" required autofocus name="name">
+                                        <div class="row">
+                                            <div class="form-group col-md-3">
+                                                <label for="pos">POS</label>
+                                                <input type="text" class="form-control" id="pos" placeholder="Enter POS" name="pos">
                                             </div>
 
-
-                                            <div class="form-group">
-                                                <label for="phno">Phone Number</label>
-                                                <input type="text" class="form-control" id="phone number"
-                                                    placeholder="Enter Phone Number" name="phno">
+                                            <div class="form-group col-md-3">
+                                                <label for="date">Date</label>
+                                                <input type="text" class="form-control" id="date" placeholder="Enter Date" name="date">
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input type="text" class="form-control" id="email"
-                                                    placeholder="Enter Email" name="email">
+                                            <div class="form-group col-md-3">
+                                                <label for="time">Time</label>
+                                                <input type="text" class="form-control" id="time" placeholder="Enter Time" name="time">
                                             </div>
 
-                                            <div class="form-group" style="display: none;">
-                                                <label for="crc">Customer Type </label>
-                                                <!-- <input type="text" class="form-control"
-                                                    placeholder="Enter Customer Type" name="type"> -->
-                                                <select name="type" id="type" class="form-control">
-
-                                                    <option value="Retail">Retail</option>
-
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="address">Address</label>
-                                                <input type="text" class="form-control" id="phone number"
-                                                    placeholder="Enter Address" name="address">
+                                            <div class="form-group col-md-3">
+                                                <label for="cashier_id">Cashier ID</label>
+                                                <input type="text" class="form-control" id="cashier_id" placeholder="Enter Cashier ID" name="cashier_id">
                                             </div>
                                         </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-3">
+                                                <label for="cashier_name">Cashier Name</label>
+                                                <input type="text" class="form-control" id="cashier_name" placeholder="Enter Cashier Name" name="cashier_name">
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <label for="receipt_no">Receipt No</label>
+                                                <input type="text" class="form-control" id="receipt_no" placeholder="Enter Receipt No" name="receipt_no">
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <label for="transaction_no">Transaction No</label>
+                                                <input type="text" class="form-control" id="transaction_no" placeholder="Enter Transaction No" name="transaction_no">
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <label for="reprinted_by">Reprinted By</label>
+                                                <input type="text" class="form-control" id="reprinted_by" placeholder="Enter Reprinted By" name="reprinted_by">
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-3">
+                                                <label for="reprinted_datetime">Reprinted Date & Time</label>
+                                                <input type="text" class="form-control" id="reprinted_datetime" placeholder="Enter Reprinted Date & Time" name="reprinted_datetime">
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <label for="passport_no">Passport No</label>
+                                                <input type="text" class="form-control" id="passport_no" placeholder="Enter Passport No" name="passport_no">
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <label for="nationality">Nationality</label>
+                                                <input type="text" class="form-control" id="nationality" placeholder="Enter Nationality" name="nationality">
+                                            </div>
+
+                                            <div class="form-group col-md-3">
+                                                <label for="flight_code">Flight Code</label>
+                                                <input type="text" class="form-control" id="flight_code" placeholder="Enter Flight Code" name="flight_code">
+                                            </div>
+                                        </div>
+
+
+  <hr>
+
+
+  <div class="row">
+    <div class="form-group col-12">
+        <label for="item_name">Item Name</label>
+        <input type="text" class="form-control" id="item_name" placeholder="Enter Item Name" name="item_name">
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-3">
+        <label for="qty">Qty</label>
+        <input type="number" class="form-control" id="qty" name="qty" min="0" step="1" oninput="calculateAll()">
+    </div>
+
+    <div class="form-group col-md-3">
+        <label for="price">Price</label>
+        <input type="number" class="form-control" id="price" name="price" min="0" step="0.01" oninput="calculateAll()">
+    </div>
+
+    <div class="form-group col-md-3">
+        <label for="discount">Discount (Amount)</label>
+        <input type="number" class="form-control" id="discount" name="discount" min="0" step="0.01" oninput="calculateAll()">
+    </div>
+
+    <div class="form-group col-md-3">
+        <label for="total">Item Total</label>
+        <input type="text" class="form-control" id="total" name="total" readonly>
+    </div>
+</div>
+
+<hr>
+
+<!-- Summary Section -->
+<div class="row">
+    <div class="form-group col-md-4">
+        <label>Sub Total</label>
+        <input type="text" class="form-control" id="sub_total" readonly name="sub_total">
+    </div>
+
+    <div class="form-group col-md-4">
+        <label>GST @ 0.00%</label>
+        <input type="text" class="form-control" id="gst" value="0.00" readonly  name="gst">
+    </div>
+
+    <div class="form-group col-md-4">
+        <label>Total Number of Items</label>
+        <input type="text" class="form-control" id="total_items" readonly name="total_items">
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4">
+        <label>Summary of Discounts</label>
+        <input type="text" class="form-control" id="total_discount" readonly name="total_discount">
+    </div>
+
+    <div class="form-group col-md-4">
+        <label>Other Disc</label>
+        <input type="number" name="other_disc" class="form-control" id="other_disc" value="0" step="0.01" oninput="calculateAll()">
+    </div>
+
+    <div class="form-group col-md-4">
+        <label>Final Total</label>
+        <input type="text" class="form-control" id="final_total" readonly name="final_total">
+    </div>
+</div>
+
+<hr>
+
+<!-- Payment Section -->
+<div class="row">
+    <div class="form-group col-md-4">
+        <label>Cash</label>
+        <input type="number" class="form-control" id="cash" step="0.01" oninput="calculateAll()" name="cash">
+    </div>
+
+    <div class="form-group col-md-4">
+        <label>Change Back (Cash)</label>
+        <input type="text" class="form-control" id="change_back" readonly name="change_back">
+    </div>
+
+    <div class="form-group col-md-4">
+        <label>Adjust</label>
+        <input type="text" class="form-control" id="adjust" readonly name="adjust">
+    </div>
+</div>
+<div class="row">
+
+    <div class="form-group col-md-3">
+        <label for="member_tier">Member Tier</label>
+        <input type="text" class="form-control" id="member_tier"
+               placeholder="Platinum" name="member_tier">
+    </div>
+
+    <div class="form-group col-md-3">
+        <label for="tier_validity">Tier Validity</label>
+        <input type="text" class="form-control" id="tier_validity"
+               placeholder="15 Nov 25" name="tier_validity">
+    </div>
+
+    <div class="form-group col-md-3">
+        <label for="nett_spend">Accumulated Nett Spend</label>
+        <input type="text" class="form-control" id="nett_spend"
+               placeholder="$52643" name="nett_spend">
+    </div>
+
+    <div class="form-group col-md-3">
+        <label for="issued_points">Issued Points</label>
+        <input type="text" class="form-control" id="issued_points"
+               placeholder="5100" name="issued_points">
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="form-group col-md-3">
+        <label for="py2025_bal">PY2025 Bal Points</label>
+        <input type="text" class="form-control" id="py2025_bal"
+               placeholder="20620" name="py2025_bal">
+    </div>
+
+    <div class="form-group col-md-3">
+        <label for="py2025_redeem">PY2025 Redeemable Points</label>
+        <input type="text" class="form-control" id="py2025_redeem"
+               placeholder="4600" name="py2025_redeem">
+    </div>
+
+    <div class="form-group col-md-3">
+        <label for="py2024_points">PY2024 Points</label>
+        <input type="text" class="form-control" id="py2024_points"
+               placeholder="0 by 30 Jun 25" name="py2024_points">
+    </div>
+ <div class="form-group col-md-3">
+        <label for="py2024_points">Barcode Number</label>
+        <input type="text" class="form-control" id="py2024_points"
+               placeholder="0 by 30 Jun 25" name="barcode">
+    </div>
+</div>
+
+
+
+
+
                                 </div>
                                 <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-default"
-                                        data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Save </button>
                                 </div>
                                 </form>
@@ -198,7 +373,7 @@
 
                         <div class="card ">
                             <div class="card-header">
-                                <h3 class="card-title">Customer List</h3>
+                                <h3 class="card-title">Invoices List</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -207,10 +382,10 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Name</th>
-                                            <th>Phone Number</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
+                                            <th>Cashier</th>
+                                            <th>Cashier Name</th>
+                                            <th>Receipt No</th>
+                                            <th>Transaction</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -221,21 +396,17 @@
 
                                         @endphp
                                         @foreach ($customers as $customer)
-                                            @php
-                                                $sells = $customer->invoices->flatMap->sells;
-                                                $inv = $customer->invoices;
 
-                                            @endphp
                                             <tr>
                                                 <td>{{ $no }}</td>
                                                 {{-- <td>{{ $customer->id }}</td> --}}
                                                 <td><a
-                                                        href="{{ url('customer_invoice', $customer->id) }}">{{ $customer->name }}</a>
+                                                        href="">{{ $customer->cashier_id }}</a>
                                                 </td>
-                                                <td>{{ $customer->phno }}</td>
-                                                <td>{{ $customer->email }}</td>
+                                                <td>{{ $customer->cashier_name }}</td>
+                                                <td>{{ $customer->receipt_no }}</td>
 
-                                                <td>{{ $customer->address }}</td>
+                                                <td>{{ $customer->transaction_no }}</td>
 
                                                 <td>
                                                     <div class="row">
@@ -252,12 +423,10 @@
                                                         @endif
 
                                                         @if (in_array('Customer Credit', $choosePermission) || auth()->user()->is_admin == '1')
-                                                            <a href="{{ url('customer_credit', $customer->id) }}"
-                                                                type="button"
-                                                                class="mx-2 btn btn-warning text-white">
-                                                                Credit</a>
-                                                        @endif
 
+                                                        @endif
+ <a href="{{ url('view', $customer->id) }}"
+                                                                title="Customer Delete" class=" btn btn-primary mx-2">Print</a>
 
                                                     </div>
 
@@ -320,7 +489,45 @@
 
 
     </script>
+<script>
+function calculateAll() {
+    const qty = parseFloat(document.getElementById('qty').value) || 0;
+    const price = parseFloat(document.getElementById('price').value) || 0;
+    const discount = parseFloat(document.getElementById('discount').value) || 0;
+    const otherDisc = parseFloat(document.getElementById('other_disc').value) || 0;
+    const cash = parseFloat(document.getElementById('cash').value) || 0;
 
+    // Item Total
+    let itemTotal = (qty * price) - discount;
+    if (itemTotal < 0) itemTotal = 0;
+    document.getElementById('total').value = itemTotal.toFixed(2);
+
+    // Sub Total
+    let subTotal = qty * price;
+    document.getElementById('sub_total').value = subTotal.toFixed(2);
+
+    // Total items
+    document.getElementById('total_items').value = qty;
+
+    // Summary of discounts
+    const totalDiscount = discount + otherDisc;
+    document.getElementById('total_discount').value = totalDiscount.toFixed(2);
+
+    // Final Total
+    let finalTotal = subTotal - totalDiscount;
+    if (finalTotal < 0) finalTotal = 0;
+    document.getElementById('final_total').value = finalTotal.toFixed(2);
+
+    // Change Back
+    const change = cash - finalTotal;
+    document.getElementById('change_back').value = change.toFixed(2);
+
+    // Adjust (like the receipt)
+    let adjust = 0;
+    if (change !== 0) adjust = (change - Math.floor(change)).toFixed(2);
+    document.getElementById('adjust').value = adjust;
+}
+</script>
 
 </body>
 

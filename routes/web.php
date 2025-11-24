@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::get('customer_edit/{id}', [CustomerController::class, 'edit']);
     Route::post('customer_update/{id}', [CustomerController::class, 'update']);
     Route::get('customer_delete/{id}', [CustomerController::class, 'delete']);
+    Route::get('view/{id}', [CustomerController::class, 'view']);
 });
 
 require __DIR__ . '/auth.php';
